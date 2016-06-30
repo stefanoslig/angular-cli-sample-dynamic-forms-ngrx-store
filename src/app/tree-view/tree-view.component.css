@@ -1,0 +1,18 @@
+.tree-node-no-children{
+    margin-right: 22px;
+}
+
+.addNewNode{
+    margin-left: 22px;
+}
+
+.addNewNode input{
+    width: 100px;
+
+}
+
+.addNewNode button{
+    width: 40px;
+
+    margin-left: 2px;
+}

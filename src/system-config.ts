@@ -7,11 +7,24 @@
  **********************************************************************************************/
 /** Map relative paths to URLs. */
 const map: any = {
+  '@ngrx': 'vendor/@ngrx'
 };
 
 /** User packages configuration. */
-const packages: any = {
-};
+    const packages: any = {
+        '@ngrx/core': {
+            main: 'index.js',
+            format: 'cjs'
+        },
+        '@ngrx/store': {
+            main: 'index.js',
+            format: 'cjs'
+        },
+        '@ngrx/devtools': {
+            main: 'index.js',
+            format: 'cjs'
+        }
+    };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************************************
@@ -33,10 +46,12 @@ const barrels: string[] = [
   // App specific barrels.
   'app',
   'app/shared',
+  'app/tree-view',
   /** @cli-barrel */
 ];
 
-const cliSystemConfigPackages: any = {};
+const cliSystemConfigPackages: any = {
+};
 barrels.forEach((barrelName: string) => {
   cliSystemConfigPackages[barrelName] = { main: 'index' };
 });
