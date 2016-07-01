@@ -11,21 +11,20 @@ const map: any = {
 };
 
 /** User packages configuration. */
-    const packages: any = {
-        '@ngrx/core': {
-            main: 'index.js',
-            format: 'cjs'
-        },
-        '@ngrx/store': {
-            main: 'index.js',
-            format: 'cjs'
-        },
-        '@ngrx/devtools': {
-            main: 'index.js',
-            format: 'cjs'
-        }
-    };
-
+const packages: any = {
+    '@ngrx/core': {
+        main: 'index.js',
+        format: 'cjs'
+    },
+    '@ngrx/store': {
+        main: 'index.js',
+        format: 'cjs'
+    },
+    'ngrx-store-logger/dist': {
+        main: 'index.js',
+        format: 'cjs'
+    }
+};
 ////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************************************
  * Everything underneath this line is managed by the CLI.
@@ -50,8 +49,7 @@ const barrels: string[] = [
   /** @cli-barrel */
 ];
 
-const cliSystemConfigPackages: any = {
-};
+const cliSystemConfigPackages: any = {};
 barrels.forEach((barrelName: string) => {
   cliSystemConfigPackages[barrelName] = { main: 'index' };
 });
@@ -64,7 +62,8 @@ System.config({
   map: {
     '@angular': 'vendor/@angular',
     'rxjs': 'vendor/rxjs',
-    'main': 'main.js'
+    'main': 'main.js',
+    '@ngrx': 'vendor/@ngrx'
   },
   packages: cliSystemConfigPackages
 });

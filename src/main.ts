@@ -1,11 +1,14 @@
+/// <reference path="../typings/browser.d.ts" />
+
 import { bootstrap } from '@angular/platform-browser-dynamic';
 import { enableProdMode } from '@angular/core';
 import { AppComponent, environment } from './app/';
 import { provideRouter }        from '@angular/router';
 import { SampleAppRoutes } from './app/index';
-
-//Devtools
-import {instrumentStore, devtoolsConfig} from '@ngrx/devtools';
+import { provideStore } from '@ngrx/store';
+import * as APP_REDUCERS from "./app/reducers/index";
+import {compose} from "@ngrx/core/compose";
+import {storeLogger} from "ngrx-store-logger";
 
 if (environment.production) {
   enableProdMode();
@@ -13,11 +16,12 @@ if (environment.production) {
 
 bootstrap(AppComponent,[
   provideRouter(SampleAppRoutes),
-  instrumentStore(),
-    devtoolsConfig({
-        position: 'right',
-        visible: true,
-        size: 0.2
-    })
+  provideStore(
+  compose(
+            storeLogger(), 
+            combineReducers
+        )({APP_REDUCERS})
+      ),
+  
 ]);
 

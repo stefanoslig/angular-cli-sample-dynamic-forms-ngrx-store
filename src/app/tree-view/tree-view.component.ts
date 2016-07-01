@@ -1,7 +1,12 @@
 import { Component } from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
 import { TreeNode } from './index';
+import { Observable } from 'rxjs/Observable';
+import { Store } from '@ngrx/store';
+import {AppState} from '../shared/index';
+import { TOGGLE_NODE } from '../actions/index';
 
+ 
 @Component({
   moduleId: module.id,
   selector: 'app-tree-view',
@@ -11,13 +16,14 @@ import { TreeNode } from './index';
 })
 
 export class TreeViewComponent {
-      
-      node1 : TreeNode = new TreeNode("Java", ["Object", "Oriented"], ["obj.java","obj2.java"],false) ;
-      node2 : TreeNode = new TreeNode("C++", ["Object", "Oriented"], ["obj.cpp","obj2.cpp"],false) ;
-      
-      nodes : TreeNode[] = [this.node1, this.node2]; 
+      nodes: Observable<TreeNode[]>;
+      constructor(
+        private _store : Store<AppState>
+      ){
+        this.nodes = this._store.select<TreeNode[]>('tree');
+      } 
 
-      toggle(node){
-        node.expanded = !node.expanded;
+      toggle(node: TreeNode){
+        this._store.dispatch({type: TOGGLE_NODE, payload: node.name});
     }
 }
